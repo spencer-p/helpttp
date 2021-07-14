@@ -10,7 +10,7 @@ import (
 // calling the inner handler.
 func WithLog(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("%s %s", r.Method, r.URL)
+		log.Printf("%s %s (%s %s)", r.Method, r.URL, r.RemoteAddr, r.Header.Get("User-Agent"))
 		next.ServeHTTP(w, r)
 	})
 }
